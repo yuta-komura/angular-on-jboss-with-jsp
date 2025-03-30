@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <title>Hello from JSP + Angular</title>
 
-    <base href="${pageContext.request.contextPath}/" />
+    <base href="/frontend/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link
       rel="stylesheet"

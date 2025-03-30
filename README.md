@@ -76,6 +76,12 @@ ant build
 C:\tools\jboss\wildfly-36.0.0.Beta1\standalone\deployments\frontend.war
 ```
 
+### 🐘 5. 起動
+
+```
+C:\tools\jboss\wildfly-36.0.0.Beta1\bin\standalone.bat
+```
+
 ---
 
 ## 🌐 アクセス確認

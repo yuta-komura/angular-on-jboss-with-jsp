@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component'; // ルートで表示したいコンポーネント
+import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
   {
     path: 'hello',
-    component: AppComponent,
+    component: HomeComponent,
   },
   {
     path: '',
