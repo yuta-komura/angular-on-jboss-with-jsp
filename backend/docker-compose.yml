@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  jboss:
+    build: .
+    container_name: angular-jboss-app
+    ports:
+      - "8080:8080"
+      - "9990:9990" # 管理用

@@ -1,0 +1,45 @@
+<project name="HelloServlet" default="build" basedir=".">
+
+    <!-- 各種プロパティ定義 -->
+    <property name="servlet.api.jar" value="lib/jakarta.servlet-api-6.0.0.jar" />
+    <property name="src.dir" value="src/main/java" />
+    <property name="web.dir" value="src/main/webapp" />
+    <property name="build.dir" value="build" />
+    <property name="classes.dir" value="${build.dir}/classes" />
+    <property name="war.file" value="dist/frontend.war" />
+
+    <!-- コンパイル時のクラスパス -->
+    <path id="provided.classpath">
+        <pathelement location="${servlet.api.jar}" />
+    </path>
+
+    <!-- クリーン処理 -->
+    <target name="clean">
+        <delete dir="${build.dir}" />
+        <delete file="${war.file}" />
+    </target>
+
+    <!-- Javaコンパイル -->
+    <target name="compile">
+        <mkdir dir="${classes.dir}" />
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false"
+            classpathref="provided.classpath">
+            <compilerarg value="--release" />
+            <compilerarg value="11" />
+        </javac>
+    </target>
+
+    <!-- WARファイル作成 -->
+    <target name="war" depends="compile">
+        <mkdir dir="dist" />
+        <war destfile="${war.file}" webxml="${web.dir}/WEB-INF/web.xml">
+            <!-- クラスファイルを正しく WEB-INF/classes に配置 -->
+            <classes dir="${classes.dir}" />
+            <!-- 静的ファイル・JSPなど -->
+            <fileset dir="${web.dir}" excludes="WEB-INF/lib/**" />
+        </war>
+    </target>
+
+    <!-- ビルド全体 -->
+    <target name="build" depends="clean,war" />
+</project>
