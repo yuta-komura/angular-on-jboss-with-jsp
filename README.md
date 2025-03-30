@@ -58,9 +58,9 @@ C:\tools\jboss\wildfly-36.0.0.Beta1\bin\standalone.bat
 
 ---
 
-## 🌐 アクセス確認
+### 🌐 アクセス確認
 
-### ✅ サーブレット確認
+#### ✅ JBoss による確認
 
 以下の URL にアクセスして、JSP と Servlet が正しく動作するか確認します：
 
@@ -73,6 +73,26 @@ http://localhost:8080/frontend/hello
 - `HelloServlet.java` が `/WEB-INF/jsp/index.jsp` をフォワードします
 - JSP 内部で Angular アプリのタグ `<app-root>` が埋め込まれます
 - `main.js` / `polyfills.js` が読み込まれ、Angular が動作開始します
+
+#### ✅ `ng serve` での確認（開発モード）
+
+Angular 開発サーバーを使って動作確認することも可能です：
+
+```bash
+cd ../angular-app
+ng serve
+```
+
+その後、次の URL にアクセスします：
+
+```
+http://localhost:4200/frontend/hello
+```
+
+ポイント：
+
+- Angular のビルドは不要で、リアルタイムで反映されます。
+- `ng serve` は JSP を経由せず、Angular 単体での開発確認に適しています。
 
 ---
 
