@@ -8,13 +8,13 @@
 
     <link
       rel="stylesheet"
-      href="${pageContext.request.contextPath}/angular/browser/styles.css"
+      href="${pageContext.request.contextPath}/angular/styles.css"
     />
   </head>
   <body>
     <app-root></app-root>
 
-    <script src="${pageContext.request.contextPath}/angular/browser/polyfills.js"></script>
-    <script src="${pageContext.request.contextPath}/angular/browser/main.js"></script>
+    <script src="${pageContext.request.contextPath}/angular/polyfills.js"></script>
+    <script src="${pageContext.request.contextPath}/angular/main.js"></script>
   </body>
 </html>

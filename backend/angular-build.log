@@ -1,0 +1,13 @@
+- Building...
+
+Initial chunk files | Names         |  Raw size | Estimated transfer size
+main.js             | main          | 206.54 kB |                57.40 kB
+polyfills.js        | polyfills     |  33.04 kB |                10.72 kB
+styles.css          | styles        |   0 bytes |                 0 bytes
+
+                    | Initial total | 239.58 kB |                68.11 kB
+
+Output location: C:\src\angular-on-jboss-with-jsp\angular-app\dist\angular-app
+
+Application bundle generation complete. [3.329 seconds]
+

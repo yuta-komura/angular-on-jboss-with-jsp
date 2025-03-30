@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project name="HelloServlet" default="build" basedir=".">
 
-    <!-- 各種プロパティ定義 -->
+    <!-- プロパティ定義 -->
     <property name="servlet.api.jar" value="lib/jakarta.servlet-api-6.0.0.jar" />
     <property name="src.dir" value="src/main/java" />
     <property name="web.dir" value="src/main/webapp" />
@@ -8,18 +9,48 @@
     <property name="classes.dir" value="${build.dir}/classes" />
     <property name="war.file" value="dist/frontend.war" />
 
-    <!-- コンパイル時のクラスパス -->
+    <!-- Angular -->
+    <property name="angular.dir" value="../angular-app" />
+    <property name="angular.ng.path" value="${angular.dir}/node_modules/.bin/ng.cmd" />
+    <property name="angular.dist.dir" value="${angular.dir}/dist/angular-app/browser" />
+    <property name="angular.output.dir" value="${web.dir}/angular" />
+    <property name="angular.build.log" value="${basedir}/angular-build.log" />
+
+    <!-- クラスパス -->
     <path id="provided.classpath">
         <pathelement location="${servlet.api.jar}" />
     </path>
 
-    <!-- クリーン処理 -->
+    <!-- clean -->
     <target name="clean">
         <delete dir="${build.dir}" />
         <delete file="${war.file}" />
+        <delete file="${angular.build.log}" />
+        <delete dir="${angular.output.dir}" />
     </target>
 
-    <!-- Javaコンパイル -->
+    <!-- Angular ビルド -->
+    <target name="ng-build">
+        <echo>Running Angular build...</echo>
+        <exec executable="${angular.ng.path}" dir="${angular.dir}" failonerror="true"
+            output="${angular.build.log}">
+            <arg value="build" />
+            <arg value="--configuration" />
+            <arg value="production" />
+            <arg value="--output-hashing=none" />
+        </exec>
+    </target>
+
+    <!-- Angular 成果物を webapp/angular にコピー -->
+    <target name="copy-angular" depends="ng-build">
+        <echo message="Copying Angular build artifacts..." />
+        <mkdir dir="${angular.output.dir}" />
+        <copy todir="${angular.output.dir}" overwrite="true">
+            <fileset dir="${angular.dist.dir}" />
+        </copy>
+    </target>
+
+    <!-- Java コンパイル -->
     <target name="compile">
         <mkdir dir="${classes.dir}" />
         <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false"
@@ -29,17 +60,15 @@
         </javac>
     </target>
 
-    <!-- WARファイル作成 -->
+    <!-- WAR 作成 -->
     <target name="war" depends="compile">
         <mkdir dir="dist" />
         <war destfile="${war.file}" webxml="${web.dir}/WEB-INF/web.xml">
-            <!-- クラスファイルを正しく WEB-INF/classes に配置 -->
             <classes dir="${classes.dir}" />
-            <!-- 静的ファイル・JSPなど -->
             <fileset dir="${web.dir}" excludes="WEB-INF/lib/**" />
         </war>
     </target>
 
     <!-- ビルド全体 -->
-    <target name="build" depends="clean,war" />
+    <target name="build" depends="clean, copy-angular, war" />
 </project>
