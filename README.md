@@ -95,15 +95,20 @@ http://localhost:8080/frontend/hello
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello from JSP + Angular</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/angular/browser/styles.css" />
+
+    <base href="/frontend/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="stylesheet"
+      href="${pageContext.request.contextPath}/angular/styles.css"
+    />
   </head>
   <body>
-    <h2><%= request.getAttribute("message") %></h2>
     <app-root></app-root>
 
-    <script src="${pageContext.request.contextPath}/angular/browser/polyfills.js"></script>
-    <script src="${pageContext.request.contextPath}/angular/browser/main.js"></script>
+    <script src="${pageContext.request.contextPath}/angular/polyfills.js"></script>
+    <script src="${pageContext.request.contextPath}/angular/main.js"></script>
   </body>
 </html>
 ```
