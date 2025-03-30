@@ -31,33 +31,7 @@ angular-on-jboss/
 
 ## 🚀 クイックスタート
 
-### 🔧 1. Angular アプリをビルド
-
-```bash
-cd angular-app
-
-# パッケージのインストール（初回のみ）
-npm install
-
-# Angular を production ビルド
-ng build --configuration production --output-hashing=none
-```
-
-> ビルド成果物は `angular-app/dist/angular-app/browser/` に出力されます。
-
----
-
-### 🧩 2. Angular ファイルを Java プロジェクトにコピー
-
-以下を `backend/src/main/webapp/angular/browser/` 以下にコピーしてください：
-
-```bash
-cp -r dist/angular-app/browser/* ../backend/src/main/webapp/angular/browser/
-```
-
----
-
-### 🛠 3. Java Servlet + JSP の WAR をビルド
+### 🛠 1. Angular アプリをビルド + Java Servlet + JSP の WAR をビルド
 
 ```bash
 cd ../backend
@@ -68,7 +42,7 @@ ant build
 
 ---
 
-### 🐘 4. WildFly（JBoss）にデプロイ
+### 🔧 2. WildFly（JBoss）にデプロイ
 
 `frontend.war` を WildFly の `standalone/deployments` ディレクトリに配置してください：
 
@@ -76,7 +50,7 @@ ant build
 C:\tools\jboss\wildfly-36.0.0.Beta1\standalone\deployments\frontend.war
 ```
 
-### 🐘 5. 起動
+### 🐘 3. 起動
 
 ```
 C:\tools\jboss\wildfly-36.0.0.Beta1\bin\standalone.bat
